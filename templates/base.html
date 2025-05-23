@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>JpJoyas</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <nav>
+    <a href="{% url 'home' %}">Inicio</a>
+    <a href="/admin/">Admin</a>
+  </nav>
+  <main>{% block content %}{% endblock %}</main>
+</body>
+</html>
