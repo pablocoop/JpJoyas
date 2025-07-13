@@ -17,7 +17,11 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test User',
+            'username' => 'user', // solo si agregaste ese campo antes
             'email' => 'test@example.com',
+            'password' => bcrypt('pass'), // cámbialo luego por seguridad
         ]);
+
+        $this->call(AdminUserSeeder::class);
     }
 }
