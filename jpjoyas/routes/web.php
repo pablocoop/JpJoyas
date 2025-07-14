@@ -22,6 +22,9 @@ Route::middleware('auth')->group(function () {
 // Blog trix upload route 
 Route::post('/trix-upload', [\App\Http\Controllers\TrixUploadController::class, 'upload'])->name('trix.upload');
 
+// Blog index route
+Route::get('/blog', [\App\Http\Controllers\BlogPostController::class, 'index'])->name('blog.index');
+
 // Blog posts routes
 Route::resource('blog', BlogPostController::class)->middleware('auth');
 

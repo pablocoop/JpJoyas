@@ -19,7 +19,10 @@
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-3xl font-semibold">Blog</h2>
       @auth
-        <a href="{{ route('blog.create') }}" class="text-blue-600 hover:underline">Nuevo Post</a>
+        <a href="{{ route('blog.create') }}"
+          class="inline-block bg-blue-100 text-blue-800 font-semibold px-4 py-2 rounded-lg border border-blue-300 hover:bg-blue-200 transition">
+          + Nueva publicación
+        </a>
       @endauth
     </div>
 
