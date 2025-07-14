@@ -40,7 +40,9 @@
                 Tu navegador no soporta video.
               </video>
             @endif
-            <p>{{ Str::limit($post->body, 200) }}</p>
+            <div class="prose max-w-none">
+                {!! Str::limit($post->body, 300) !!}
+            </div>
           </article>
         @endforeach
       </div>

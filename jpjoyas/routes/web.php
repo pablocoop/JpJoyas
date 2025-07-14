@@ -19,4 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/blog', [BlogPostController::class, 'store'])->name('blog.store');
 });
 
+// Blog trix upload route 
+Route::post('/trix-upload', [\App\Http\Controllers\TrixUploadController::class, 'upload'])->name('trix.upload');
+
+
 require __DIR__.'/auth.php';

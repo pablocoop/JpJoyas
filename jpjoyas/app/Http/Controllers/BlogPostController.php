@@ -30,6 +30,7 @@ class BlogPostController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());  // Esto detiene la ejecución y muestra todos los datos enviados
         $data = $request->validate([  // Validate the incoming request data
             'title' => 'required|string|max:255', // obligatorio, cadena, máximo 255 caracteres
             'body' => 'required|string', // obligatorio, cadena

@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Tonysm\RichTextLaravel\Casts\AsRichTextContent;
+use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 
 class BlogPost extends Model
 {
-    use HasFactory;
+    use HasFactory, HasRichText;
 
     protected $fillable = [
         'title',
@@ -16,6 +18,11 @@ class BlogPost extends Model
         'video_path',
         'user_id',
     ];
+
+    protected $casts = [
+        'body' => AsRichTextContent::class,
+    ];
+    protected array $richTextAttributes = ['body'];
 
     public function user()
     {

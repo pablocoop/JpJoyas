@@ -14,7 +14,11 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <x-rich-text::styles theme="richtextlaravel" data-turbo-track="false" />
+        <!-- Trix Editor -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.umd.min.js"></script>
     </head>
+
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
@@ -33,5 +37,44 @@
                 @yield('content') 
             </main>
         </div>
+
+        // Include Trix Editor scripts
+        <script>
+            document.addEventListener("trix-attachment-add", function (event) {
+                const attachment = event.attachment;
+                if (attachment.file) {
+                uploadTrixImage(attachment);
+                }
+            });
+
+            function uploadTrixImage(attachment) {
+                // FormData para enviar la imagen
+                const file = attachment.file;
+                const form = new FormData();
+                form.append("attachment", file);
+
+                // Enviar POST a endpoint Laravel
+                fetch("/trix-upload", {
+                method: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: form,
+                })
+                .then(response => response.json())
+                .then(result => {
+                // Una vez subida, le pasamos la URL real a Trix
+                attachment.setAttributes({
+                    url: result.url,
+                    href: result.url
+                });
+                })
+                .catch(error => {
+                console.error("Error al subir imagen a Trix:", error);
+                });
+            }
+        </script>
+
+
     </body>
 </html>
