@@ -41,8 +41,28 @@
               </video>
             @endif
             <div class="prose max-w-none">
-                {!! Str::limit($post->body, 300) !!}
+                {!! $post->body !!}
             </div>
+            <div class="mt-4">
+                <a href="{{ route('blog.show', $post) }}" class="text-indigo-600 hover:underline">Leer más →</a>
+            </div>
+            @auth
+                  @if(Auth::id() === $post->user_id)
+                      <div class="mt-4 flex gap-4">
+                          <a href="{{ route('blog.edit', $post) }}"
+                            class="text-blue-600 hover:underline">Editar</a>
+
+                          <form action="{{ route('blog.destroy', $post) }}" method="POST"
+                                onsubmit="return confirm('¿Seguro que deseas eliminar esta publicación?')">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="text-red-600 hover:underline">
+                                  Eliminar
+                              </button>
+                          </form>
+                      </div>
+                  @endif
+              @endauth
           </article>
         @endforeach
       </div>

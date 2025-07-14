@@ -54,11 +54,12 @@ class BlogPostController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource. 
      */
     public function show(string $id)
     {
-        //
+        $post = BlogPost::with('user')->findOrFail($id);
+        return view('blog.show', compact('post'));
     }
 
     /**
@@ -66,15 +67,46 @@ class BlogPostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = BlogPost::findOrFail($id);
+
+        // Opcional: asegurarse de que el usuario solo edite su propio post
+        if ($post->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        return view('blog.edit', compact('post'));
     }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $post = BlogPost::findOrFail($id);
+
+        if ($post->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'body' => 'required|string',
+            'image' => 'nullable|image',
+            'video' => 'nullable|file|mimetypes:video/mp4,video/webm',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $data['image_path'] = $request->file('image')->store('images', 'public');
+        }
+
+        if ($request->hasFile('video')) {
+            $data['video_path'] = $request->file('video')->store('videos', 'public');
+        }
+
+        $post->update($data);
+
+        return redirect()->route('blog.show', $post)->with('success', 'Post actualizado exitosamente.');
     }
 
     /**
@@ -82,6 +114,14 @@ class BlogPostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = BlogPost::findOrFail($id);
+
+        if ($post->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        $post->delete();
+
+        return redirect()->route('home')->with('success', 'Post eliminado exitosamente.');
     }
 }
