@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-4xl mx-auto px-6">
+<div class="max-w-4xl mx-auto px-6 py-12">
   {{-- Presentación --}}
-  <section class="mb-12">
-    <h1 class="text-4xl font-bold mb-4">JP Joyas</h1>
-    <p>Bienvenidos a nuestro catálogo online de joyería artesanal</p>
+  <section class="mb-16 text-center">
+    <h1 class="text-5xl font-extrabold text-gray-800 mb-4 tracking-tight">JP Joyas</h1>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Bienvenidos a nuestro catálogo digital de joyería artesanal hecha a mano con amor desde Villarrica.</p>
   </section>
 
   {{-- Historia --}}
-  <section class="mb-12">
-    <h2 class="text-3xl font-semibold mb-4">Nuestra Historia</h2>
-    <p>Historia de JP Joyas</p>
+  <section class="mb-16 bg-white rounded-lg shadow p-6">
+    <h2 class="text-3xl font-semibold text-gray-800 mb-4">Nuestra Historia</h2>
+    <p class="text-gray-600 leading-relaxed">JP Joyas nace del amor por los detalles y la pasión por lo hecho a mano. Cada pieza cuenta una historia única, elaborada con dedicación y creatividad.</p>
   </section>
 
   {{-- Blog --}}
@@ -31,43 +31,57 @@
     @else
       <div class="space-y-8">
         @foreach($posts as $post)
-          <article class="bg-white p-6 rounded-lg shadow">
-            <h3 class="text-2xl font-bold">{{ $post->title }}</h3>
-            <p class="text-sm text-gray-500 mb-2">por {{ $post->user->name }} · {{ $post->created_at->format('d M Y') }}</p>
-            @if($post->image_path)
-              <img src="{{ asset('storage/' . $post->image_path) }}" class="w-full mb-4 rounded" alt="Imagen del post">
-            @endif
-            @if($post->video_path)
-              <video controls class="w-full mb-4 rounded">
-                <source src="{{ asset('storage/' . $post->video_path) }}" type="video/mp4">
-                Tu navegador no soporta video.
-              </video>
-            @endif
-            <div class="prose max-w-none">
-                {!! $post->body !!}
-            </div>
-            <div class="mt-4">
-                <a href="{{ route('blog.show', $post) }}" class="text-indigo-600 hover:underline">Leer más →</a>
-            </div>
-            @auth
-                  @if(Auth::id() === $post->user_id)
-                      <div class="mt-4 flex gap-4">
-                          <a href="{{ route('blog.edit', $post) }}"
-                            class="text-blue-600 hover:underline">Editar</a>
+        <article class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+          <div class="flex flex-col md:flex-row md:items-start gap-6">
+            
+            {{-- Columna de texto --}}
+            <div class="flex-1 min-w-0">
+              <h3 class="text-2xl font-bold text-gray-800 mb-1">{{ $post->title }}</h3>
+              <p class="text-sm text-gray-500 mb-3">
+                  por {{ $post->user->name }} · {{ $post->created_at->format('d M Y') }}
+              </p>
 
-                          <form action="{{ route('blog.destroy', $post) }}" method="POST"
-                                onsubmit="return confirm('¿Seguro que deseas eliminar esta publicación?')">
-                              @csrf
-                              @method('DELETE')
-                              <button type="submit" class="text-red-600 hover:underline">
-                                  Eliminar
-                              </button>
-                          </form>
-                      </div>
-                  @endif
+              <div class="prose max-w-none text-gray-700 break-words">
+                  {!! $post->preview_text !!}
+              </div>
+
+              <div class="mt-4">
+                  <a href="{{ route('blog.show', $post) }}" class="inline-block text-blue-600 font-medium hover:underline">
+                      Leer más →
+                  </a>
+              </div>
+
+              @auth
+                @if(Auth::id() === $post->user_id)
+                  <div class="mt-4 flex gap-4">
+                    <a href="{{ route('blog.edit', $post) }}" class="text-blue-600 hover:underline">Editar</a>
+                    <form action="{{ route('blog.destroy', $post) }}" method="POST"
+                          onsubmit="return confirm('¿Seguro que deseas eliminar esta publicación?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-600 hover:underline">
+                            Eliminar
+                        </button>
+                    </form>
+                  </div>
+                @endif
               @endauth
-          </article>
+            </div>
+
+            {{-- Imagen (si existe) --}}
+            @if($post->preview_image)
+              <div class="w-full md:w-1/3 flex-shrink-0 flex justify-center items-start">
+                <div class="max-w-[200px] w-full">
+                  {!! $post->preview_image !!}
+                </div>
+              </div>
+            @endif
+
+          </div>
+        </article>
+
         @endforeach
+
       </div>
     @endif
   </section>
