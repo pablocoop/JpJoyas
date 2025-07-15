@@ -3,13 +3,13 @@
 @section('content')
 <div class="max-w-4xl mx-auto px-6 py-12">
   {{-- Presentación --}}
-  <section class="mb-16 text-center">
+  <section id="presentacion" class="mb-16 text-center">
     <h1 class="text-5xl font-extrabold text-gray-800 mb-4 tracking-tight">JP Joyas</h1>
     <p class="text-lg text-gray-600 max-w-2xl mx-auto">Bienvenidos a nuestro catálogo digital de joyería artesanal hecha a mano con amor desde Villarrica.</p>
   </section>
 
   {{-- Historia --}}
-  <section class="mb-16 bg-white rounded-lg shadow p-6">
+  <section id="historia" class="mb-16 bg-white rounded-lg shadow p-6">
     <h2 class="text-3xl font-semibold text-gray-800 mb-4">Nuestra Historia</h2>
     <p class="text-gray-600 leading-relaxed">JP Joyas nace del amor por los detalles y la pasión por lo hecho a mano. Cada pieza cuenta una historia única, elaborada con dedicación y creatividad.</p>
   </section>
@@ -31,7 +31,17 @@
     @else
       <div class="space-y-8">
         @foreach($posts as $post)
-        <article class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+        <article class="relative bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+          {{-- Botones flotantes --}}
+          @auth
+            @if(Auth::id() === $post->user_id)
+              <div class="absolute top-2 -right-12 flex flex-col space-y-2 z-10">
+                <x-delete-button :action="route('blog.destroy', $post)" />
+                <x-edit-button :href="route('blog.edit', $post)" />
+              </div>
+            @endif
+          @endauth
+
           <div class="flex flex-col md:flex-row md:items-start gap-6">
             
             {{-- Columna de texto --}}
@@ -41,31 +51,12 @@
                   por {{ $post->user->name }} · {{ $post->created_at->format('d M Y') }}
               </p>
 
-              <div class="prose max-w-none text-gray-700 break-words">
+              <div class="prose max-w-none text-gray-700 break-words mb-4">
                   {!! $post->preview_text !!}
               </div>
 
-              <div class="mt-4">
-                  <a href="{{ route('blog.show', $post) }}" class="inline-block text-blue-600 font-medium hover:underline">
-                      Leer más →
-                  </a>
-              </div>
-
-              @auth
-                @if(Auth::id() === $post->user_id)
-                  <div class="mt-4 flex gap-4">
-                    <a href="{{ route('blog.edit', $post) }}" class="text-blue-600 hover:underline">Editar</a>
-                    <form action="{{ route('blog.destroy', $post) }}" method="POST"
-                          onsubmit="return confirm('¿Seguro que deseas eliminar esta publicación?')">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-red-600 hover:underline">
-                            Eliminar
-                        </button>
-                    </form>
-                  </div>
-                @endif
-              @endauth
+              {{-- Botón Ver más con texto --}}
+              <x-view-button :href="route('blog.show', $post)" />
             </div>
 
             {{-- Imagen (si existe) --}}
@@ -81,6 +72,7 @@
         </article>
 
         @endforeach
+
 
       </div>
     @endif

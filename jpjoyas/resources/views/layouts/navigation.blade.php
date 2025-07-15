@@ -15,6 +15,12 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Página Principal') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ url('/#presentacion') }}">
+                        {{ __('Presentación') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ url('/#historia') }}">
+                        {{ __('Historia') }}
+                    </x-nav-link>
                     @auth
                         <x-nav-link :href="route('blog.index')" :active="request()->routeIs('blog.index')">
                             {{ __('Blog') }}
