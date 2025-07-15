@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-4xl mx-auto px-6 py-12">
+<div class="bg-fixed bg-cover bg-center min-h-screen" style="background-image: url('/images/fondo-jpjoyas.jpg');">
+  <div class="max-w-4xl mx-auto px-6 py-12 bg-white/70 backdrop-blur rounded-lg">  
   {{-- Presentación --}}
   <section id="presentacion" class="mb-16 text-center">
     <h1 class="text-5xl font-extrabold text-gray-800 mb-4 tracking-tight">JP Joyas</h1>
@@ -77,5 +78,6 @@
       </div>
     @endif
   </section>
+  </div>
 </div>
 @endsection

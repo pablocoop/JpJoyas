@@ -19,7 +19,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.umd.min.js"></script>
     </head>
 
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased" style="background-image: url('/images/fondo-jpjoyas.jpg');">
         <div class="flex flex-col min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
