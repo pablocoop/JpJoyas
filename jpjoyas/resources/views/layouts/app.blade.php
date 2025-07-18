@@ -19,8 +19,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.umd.min.js"></script>
     </head>
 
-    <body class="font-sans antialiased" style="background-image: url('/images/fondo-jpjoyas.jpg');">
-        <div class="flex flex-col min-h-screen bg-gray-100">
+    <body class="font-sans antialiased bg-fixed bg-no-repeat bg-top bg-black" style="background-image: url('/images/fondo-jpjoyas.jpg'); background-size: contain;">
+        <div class="flex flex-col min-h-screen bg-black/30">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -37,7 +37,7 @@
                 @yield('content') 
             </main>
 
-            <footer class="bg-gray-100 mt-16 border-t border-gray-200">
+            <footer class="bg-black mt-16 border-t border-gray-900">
                 <div class="max-w-4xl mx-auto px-6 py-8 text-center text-sm text-gray-600">
                     <p class="mb-4 font-semibold">Encuéntranos en nuestras redes sociales</p>
                     <div class="flex justify-center space-x-6 text-blue-700">

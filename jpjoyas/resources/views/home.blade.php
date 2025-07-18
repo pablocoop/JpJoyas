@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-fixed bg-cover bg-center min-h-screen" style="background-image: url('/images/fondo-jpjoyas.jpg');">
-  <div class="max-w-4xl mx-auto px-6 py-12 bg-white/70 backdrop-blur rounded-lg">  
+<div class="max-w-4xl mx-auto px-6 py-20 bg-gray-300/70 backdrop-blur rounded-lg mt-8">
+  {{-- Contenedor principal --}}  
+    
   {{-- Presentación --}}
   <section id="presentacion" class="mb-16 text-center">
     <h1 class="text-5xl font-extrabold text-gray-800 mb-4 tracking-tight">JP Joyas</h1>
@@ -10,7 +11,7 @@
   </section>
 
   {{-- Historia --}}
-  <section id="historia" class="mb-16 bg-white rounded-lg shadow p-6">
+  <section id="historia" class="mb-16 bg-gray-300 rounded-lg shadow p-6">
     <h2 class="text-3xl font-semibold text-gray-800 mb-4">Nuestra Historia</h2>
     <p class="text-gray-600 leading-relaxed">JP Joyas nace del amor por los detalles y la pasión por lo hecho a mano. Cada pieza cuenta una historia única, elaborada con dedicación y creatividad.</p>
   </section>
@@ -28,11 +29,11 @@
     </div>
 
     @if($posts->isEmpty())
-      <p class="text-gray-600">No hay publicaciones aún.</p>
+      <p class="text-gray-800">No hay publicaciones aún.</p>
     @else
       <div class="space-y-8">
         @foreach($posts as $post)
-        <article class="relative bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+        <article class="relative bg-gray-300 p-6 rounded-lg shadow hover:shadow-md transition">
           {{-- Botones flotantes --}}
           @auth
             @if(Auth::id() === $post->user_id)
@@ -78,6 +79,5 @@
       </div>
     @endif
   </section>
-  </div>
 </div>
 @endsection
