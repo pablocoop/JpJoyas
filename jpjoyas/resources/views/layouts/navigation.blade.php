@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="block h-16 w-auto fill-current text-gray-800" />
+                        <x-application-logo class="block h-20 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
 
@@ -21,11 +21,9 @@
                     <x-nav-link href="{{ url('/#historia') }}">
                         {{ __('Historia') }}
                     </x-nav-link>
-                    @auth
-                        <x-nav-link :href="route('blog.index')" :active="request()->routeIs('blog.index')">
-                            {{ __('Blog') }}
-                        </x-nav-link>
-                    @endauth
+                    <x-nav-link :href="route('blog.index')" :active="request()->routeIs('blog.index')">
+                        {{ __('Blog') }}
+                    </x-nav-link>
                 </div>
             </div>
 
