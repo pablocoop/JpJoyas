@@ -98,14 +98,14 @@
 
                 <div class="mt-3 space-y-1">
                     <x-responsive-nav-link :href="route('profile.edit')">
-                        {{ __('Profile') }}
+                        {{ __('Mi Perfil') }}
                     </x-responsive-nav-link>
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault(); this.closest('form').submit();">
-                            {{ __('Log Out') }}
+                            {{ __('Cerrar Sesión') }}
                         </x-responsive-nav-link>
                     </form>
                 </div>
@@ -113,10 +113,10 @@
         @else
             <div class="pt-4 pb-1 border-t border-gray-200 px-4">
                 <a href="{{ route('login') }}" class="block font-medium text-base text-gray-700 hover:text-gray-900">
-                    {{ __('Log in') }}
+                    {{ __('Iniciar Sesión') }}
                 </a>
                 <a href="{{ route('register') }}" class="block mt-2 font-medium text-base text-gray-700 hover:text-gray-900">
-                    {{ __('Register') }}
+                    {{ __('Registrarse') }}
                 </a>
             </div>
         @endauth

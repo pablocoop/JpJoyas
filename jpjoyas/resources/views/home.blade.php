@@ -1,17 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-6xl mx-auto px-6 py-20 bg-gray-300/70 backdrop-blur rounded-lg mt-8">
+<div class="max-w-5xl mx-auto px-6 py-20 bg-gray-300/70 backdrop-blur rounded-lg mt-8">
   {{-- Contenedor principal --}}  
-  
-  {{-- Imágenes --}}
-
-
   {{-- Presentación --}}
   <section id="titulo" class="mb-16 text-center">
-    <h1 class="font-dragonwick text-7xl text-gray-700 mb-4 tracking-tight">JP Joyas</h1>
-    {{-- <p class="text-lg text-gray-600 max-w-2xl mx-auto">Joyería online de Villarrica, creada por Juan Pablo Osorio Valenzuela con un objetivo claro: ofrecer joyas de plata de primera calidad, elaboradas con prolijidad y precisión, y diseñadas para ser accesibles sin comprometer la excelencia. Al eliminar los intermediarios, te ofrecemos joyas sin sobreprecios ni comisiones por reventa, directamente del fabricante a tus manos. Descubre la auténtica calidad de la plata, sin costos innecesarios.</p> --}}
+    <h1 class="font-dragonwick text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-white/80 to-white/10 mb-4 tracking-tight text-center">
+      JP Joyas
+    </h1>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Joyería online de Villarrica.</p>
   </section>
+  {{-- Imágenes --}}
+  <div class="flex justify-center mb-12">
+      <img src="{{ asset('images/home.jpg') }}" class="h-auto w-auto rounded-xl shadow-lg">
+  </div>
+  {{-- Descripción --}}
   <section id="descripcion" class="relative mb-16 bg-gray-300 rounded-lg shadow p-6">
     <h2 class="font-dragonwick text-3xl font-semibold text-gray-800 mb-4">JP Joyas</h2>
     {{-- Botón de edición solo visible si es admin --}}
