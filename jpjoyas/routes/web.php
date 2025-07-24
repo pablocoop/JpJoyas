@@ -26,6 +26,6 @@ Route::post('/trix-upload', [\App\Http\Controllers\TrixUploadController::class, 
 Route::get('/blog', [\App\Http\Controllers\BlogPostController::class, 'index'])->name('blog.index');
 
 // Blog posts routes
-Route::resource('blog', BlogPostController::class)->middleware('auth');
+Route::resource('blog', BlogPostController::class); //->middleware('auth');
 
 require __DIR__.'/auth.php';

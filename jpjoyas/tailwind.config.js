@@ -13,6 +13,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                dragonwick: ['Dragonwick', 'cursive'], //  Agregamos aquí fuente Dragonwick
             },
         },
     },
