@@ -1,16 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-4xl mx-auto px-6 py-20 bg-gray-300/70 backdrop-blur rounded-lg mt-8">
+<div class="max-w-6xl mx-auto px-6 py-20 bg-gray-300/70 backdrop-blur rounded-lg mt-8">
   {{-- Contenedor principal --}}  
-    
+  
+  {{-- Imágenes --}}
+
+
   {{-- Presentación --}}
   <section id="titulo" class="mb-16 text-center">
     <h1 class="font-dragonwick text-7xl text-gray-700 mb-4 tracking-tight">JP Joyas</h1>
     {{-- <p class="text-lg text-gray-600 max-w-2xl mx-auto">Joyería online de Villarrica, creada por Juan Pablo Osorio Valenzuela con un objetivo claro: ofrecer joyas de plata de primera calidad, elaboradas con prolijidad y precisión, y diseñadas para ser accesibles sin comprometer la excelencia. Al eliminar los intermediarios, te ofrecemos joyas sin sobreprecios ni comisiones por reventa, directamente del fabricante a tus manos. Descubre la auténtica calidad de la plata, sin costos innecesarios.</p> --}}
   </section>
   <section id="descripcion" class="relative mb-16 bg-gray-300 rounded-lg shadow p-6">
-    <h2 class="text-3xl font-semibold text-gray-800 mb-4">JPJoyas</h2>
+    <h2 class="font-dragonwick text-3xl font-semibold text-gray-800 mb-4">JP Joyas</h2>
     {{-- Botón de edición solo visible si es admin --}}
     @auth
       @if(Auth::user()->is_admin)
@@ -20,7 +23,7 @@
       @endif
     @endauth
 
-    <p class="text-gray-600 leading-relaxed">
+    <p class="text-gray-600 leading-relaxed text-xl">
       {!! $descripcion ? nl2br(e($descripcion)) : 'Aquí va la descripción de JP Joyas.' !!}
     </p>
   </section>
@@ -35,7 +38,7 @@
         </div>
       @endif
     @endauth
-    <p class="text-gray-600 leading-relaxed">
+    <p class="text-gray-600 leading-relaxed text-xl">
       {!! $historia ? nl2br(e($historia)) : 'Aquí va la historia.' !!}
     </p>
 

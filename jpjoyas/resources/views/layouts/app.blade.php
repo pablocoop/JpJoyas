@@ -40,12 +40,12 @@
 
             <footer class="bg-black mt-16 border-t border-gray-900">
                 <div class="max-w-4xl mx-auto px-6 py-8 text-center text-sm text-gray-600">
-                    <p class="mb-4 font-semibold">Encuéntranos en nuestras redes sociales</p>
+                    <p class="mb-4 font-semibold"> Contáctame solo por teléfono o WhatsApp +569 3581 5768</p>
                     <div class="flex justify-center space-x-6 text-blue-700">
                         <a href="https://www.facebook.com/JuanPabloOsorioJP/" target="_blank" class="hover:underline">
                             Facebook
                         </a>
-                        <a href="https://www.instagram.com/invites/contact/?i=1egfgisxytf3a&utm_content=5h9sk0o" target="_blank" class="hover:underline">
+                        <a href="https://www.instagram.com/jp.joyas/" target="_blank" class="hover:underline">
                             Instagram
                         </a>
                         <a href="https://wa.me/message/RCSEZTH4EZGMA1" target="_blank" class="hover:underline">
