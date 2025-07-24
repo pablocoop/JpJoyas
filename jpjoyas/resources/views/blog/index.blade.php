@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-3xl mx-auto px-6 py-12">
-    <h1 class="text-4xl font-extrabold text-gray-800 mb-10 text-center">Publicaciones del Blog</h1>
+<div class="max-w-4xl mx-auto px-6 py-20 bg-gray-300/70 backdrop-blur rounded-lg mt-8">
+    <h1 class="text-4xl font-extrabold text-gray-700 mb-10 text-center">Publicaciones del Blog</h1>
 
     @if($posts->isEmpty())
-        <p class="text-gray-600 text-center">No hay publicaciones aún.</p>
+        <article class="relative bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition">
+            <p class="text-gray-600 text-center">No hay publicaciones aún.</p>
+        </article>
     @else
         <div class="space-y-16">
             @foreach($posts as $post)

@@ -44,14 +44,14 @@
 
                         <x-slot name="content">
                             <x-dropdown-link :href="route('profile.edit')">
-                                {{ __('Profile') }}
+                                {{ __('Mi Perfil') }}
                             </x-dropdown-link>
 
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault(); this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Cerrar Sesión') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>
@@ -59,10 +59,10 @@
                 @else
                     <div class="space-x-4">
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-gray-900 underline">
-                            {{ __('Log in') }}
+                            {{ __('Iniciar Sesión') }}
                         </a>
                         <a href="{{ route('register') }}" class="text-sm text-gray-700 hover:text-gray-900 underline">
-                            {{ __('Register') }}
+                            {{ __('Registrarse') }}
                         </a>
                     </div>
                 @endauth

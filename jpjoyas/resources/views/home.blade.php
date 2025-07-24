@@ -9,21 +9,37 @@
     <h1 class="font-dragonwick text-7xl text-gray-700 mb-4 tracking-tight">JP Joyas</h1>
     {{-- <p class="text-lg text-gray-600 max-w-2xl mx-auto">Joyería online de Villarrica, creada por Juan Pablo Osorio Valenzuela con un objetivo claro: ofrecer joyas de plata de primera calidad, elaboradas con prolijidad y precisión, y diseñadas para ser accesibles sin comprometer la excelencia. Al eliminar los intermediarios, te ofrecemos joyas sin sobreprecios ni comisiones por reventa, directamente del fabricante a tus manos. Descubre la auténtica calidad de la plata, sin costos innecesarios.</p> --}}
   </section>
-  <section id="descripcion" class="mb-16 bg-gray-300 rounded-lg shadow p-6">
+  <section id="descripcion" class="relative mb-16 bg-gray-300 rounded-lg shadow p-6">
     <h2 class="text-3xl font-semibold text-gray-800 mb-4">JPJoyas</h2>
+    {{-- Botón de edición solo visible si es admin --}}
+    @auth
+      @if(Auth::user()->is_admin)
+        <div class="absolute top-4 right-4">
+          <x-edit-button :href="route('info.edit', 'descripcion')" />
+        </div>
+      @endif
+    @endauth
+
     <p class="text-gray-600 leading-relaxed">
-    Joyería online de Villarrica, creada por Juan Pablo Osorio Valenzuela con un objetivo claro: ofrecer joyas de plata de primera calidad, elaboradas con prolijidad y precisión, y diseñadas para ser accesibles sin comprometer la excelencia. Al eliminar los intermediarios, te ofrecemos joyas sin sobreprecios ni comisiones por reventa, directamente del fabricante a tus manos. Descubre la auténtica calidad de la plata, sin costos innecesarios.
+      {!! $descripcion ? nl2br(e($descripcion)) : 'Aquí va la descripción de JP Joyas.' !!}
     </p>
   </section>
   {{-- Historia --}}
-  <section id="historia" class="mb-16 bg-gray-300 rounded-lg shadow p-6">
+  <section id="historia" class="relative mb-16 bg-gray-300 rounded-lg shadow p-6">
     <h2 class="text-3xl font-semibold text-gray-800 mb-4">Nuestra Historia</h2>
-    <p class="text-gray-600 leading-relaxed">Mi historia con la joyería comenzó en 2017, cuando empecé a vender joyas de plata importadas desde fábricas de Italia y Tailandia. Sin embargo, pronto descubrí que mis habilidades manuales y formación profesional me permitían crear algo más auténtico: joyas diseñadas y fabricadas por mí mismo.
+    {{-- Botón de edición solo visible si es admin --}}
+    @auth
+      @if(Auth::user()->is_admin)
+        <div class="absolute top-4 right-4">
+          <x-edit-button :href="route('info.edit', 'historia')" />
+        </div>
+      @endif
+    @endauth
+    <p class="text-gray-600 leading-relaxed">
+      {!! $historia ? nl2br(e($historia)) : 'Aquí va la historia.' !!}
+    </p>
 
-Con el tiempo, he descubierto la verdadera ventaja de trabajar con plata pura, libre de aleaciones que pueden alterar su calidad y brillo. Esto me permite crear joyas que no solo son hermosas, sino que también mantienen su pureza y valor. Mis diseños reflejan la esencia de la idiosincrasia chilena y son elaborados con dedicación y atención al detalle, lo que me permite ofrecer piezas de alta calidad a precios justos.
-
-Hoy en día, me enorgullece ofrecer joyas que no solo son hermosas, sino que también llevan un pedacito de mi historia y dedicación.</p>
-  </section>
+    </section>
 
   {{-- Blog --}}
   <section>
