@@ -9,12 +9,12 @@
     <h1 class="font-dragonwick text-7xl text-gray-700 mb-4 tracking-tight">JP Joyas</h1>
     {{-- <p class="text-lg text-gray-600 max-w-2xl mx-auto">Joyería online de Villarrica, creada por Juan Pablo Osorio Valenzuela con un objetivo claro: ofrecer joyas de plata de primera calidad, elaboradas con prolijidad y precisión, y diseñadas para ser accesibles sin comprometer la excelencia. Al eliminar los intermediarios, te ofrecemos joyas sin sobreprecios ni comisiones por reventa, directamente del fabricante a tus manos. Descubre la auténtica calidad de la plata, sin costos innecesarios.</p> --}}
   </section>
-    <section id="descripcion" class="mb-16 bg-gray-300 rounded-lg shadow p-6">
+  <section id="descripcion" class="mb-16 bg-gray-300 rounded-lg shadow p-6">
     <h2 class="text-3xl font-semibold text-gray-800 mb-4">JPJoyas</h2>
     <p class="text-gray-600 leading-relaxed">
     Joyería online de Villarrica, creada por Juan Pablo Osorio Valenzuela con un objetivo claro: ofrecer joyas de plata de primera calidad, elaboradas con prolijidad y precisión, y diseñadas para ser accesibles sin comprometer la excelencia. Al eliminar los intermediarios, te ofrecemos joyas sin sobreprecios ni comisiones por reventa, directamente del fabricante a tus manos. Descubre la auténtica calidad de la plata, sin costos innecesarios.
     </p>
-    </section>
+  </section>
   {{-- Historia --}}
   <section id="historia" class="mb-16 bg-gray-300 rounded-lg shadow p-6">
     <h2 class="text-3xl font-semibold text-gray-800 mb-4">Nuestra Historia</h2>
