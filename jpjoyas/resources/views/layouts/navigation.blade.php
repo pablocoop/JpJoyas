@@ -62,9 +62,9 @@
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-gray-900 underline">
                             {{ __('Iniciar Sesión') }}
                         </a>
-                        <a href="{{ route('register') }}" class="text-sm text-gray-700 hover:text-gray-900 underline">
+                        {{-- <a href="{{ route('register') }}" class="text-sm text-gray-700 hover:text-gray-900 underline">
                             {{ __('Registrarse') }}
-                        </a>
+                        </a> --}}
                     </div>
                 @endauth
             </div>
@@ -127,9 +127,9 @@
                 <a href="{{ route('login') }}" class="block font-medium text-base text-gray-700 hover:text-gray-900">
                     {{ __('Iniciar Sesión') }}
                 </a>
-                <a href="{{ route('register') }}" class="block mt-2 font-medium text-base text-gray-700 hover:text-gray-900">
+                {{-- <a href="{{ route('register') }}" class="block mt-2 font-medium text-base text-gray-700 hover:text-gray-900">
                     {{ __('Registrarse') }}
-                </a>
+                </a> --}}
             </div>
         @endauth
     </div>
