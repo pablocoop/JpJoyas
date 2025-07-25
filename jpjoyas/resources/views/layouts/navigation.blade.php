@@ -71,8 +71,8 @@
 
             <!-- Subtítulo solo visible en móviles -->
             <div class="sm:hidden flex items-center justify-end flex-1 me-4">
-                <p class="font-dragonwick text-base text-gray-800 font-medium whitespace-nowrap text-right">
-                    Joyería online de Villarrica.
+                <p class="text-sm font-dragonwick text-gray-800 font-medium whitespace-nowrap text-right">
+                    Desde 2017
                 </p>
             </div>
 

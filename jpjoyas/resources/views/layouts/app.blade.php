@@ -42,7 +42,7 @@
 
             <footer class="bg-black mt-16 border-t border-gray-900">
                 <div class="max-w-4xl mx-auto px-6 py-8 text-center text-sm text-gray-100">
-                    <p class="mb-4 font-semibold"> Contáctame solo por teléfono o WhatsApp +569 3581 5768</p>
+                    <p class="mb-4 font-semibold"> Contáctame solo por teléfono o WhatsApp</p>
                     <div class="flex justify-center space-x-6">
                     <a href="https://wa.me/message/RCSEZTH4EZGMA1" target="_blank" class="text-green-600 hover:text-green-800 text-3xl" aria-label="WhatsApp">
                         <i class="fab fa-whatsapp"></i>

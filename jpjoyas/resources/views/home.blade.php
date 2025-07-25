@@ -1,26 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-5xl mx-auto px-6 py-20 bg-gray-300/70 backdrop-blur rounded-lg mt-8">
+<div class="max-w-5xl mx-auto px-6 py-8 bg-gray-300/70 backdrop-blur rounded-lg mt-8">
   {{-- Contenedor principal --}}  
   {{-- Presentación --}}
-  <section id="titulo" class="mb-16 text-center">
-    <h1 class="font-dragonwick text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl  text-gray-800 mb-4 tracking-tight text-center">
+  <section id="titulo" class="mb-4 text-center">
+    <h1 class="font-dragonwick text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl  text-gray-800 mb-2 tracking-tight text-center">
       JP Joyas
     </h1>
+    <p class="text-lg text-gray-700 font-dragonwick">
+      Joyería&nbsp;  online&nbsp; de Villarrica.
+    </p>
     <div class="border border-gray-500 rounded-lg px-6 py-4 inline-block mt-4">
       <p class=" text-lg text-gray-700 mb-4">
         Accede al catálogo de mis redes sociales
       </p>
 
       <div class="flex justify-center space-x-6">
-        <a href="https://wa.me/message/RCSEZTH4EZGMA1" target="_blank" class="text-green-600 hover:text-green-800 text-3xl" aria-label="WhatsApp">
+        <a href="https://wa.me/message/RCSEZTH4EZGMA1" target="_blank" class="text-black hover:text-gray-700 text-3xl" aria-label="WhatsApp">
           <i class="fab fa-whatsapp"></i>
         </a>
-        <a href="https://www.instagram.com/jp.joyas/" target="_blank" class="text-pink-500 hover:text-pink-700 text-3xl" aria-label="Instagram">
+        <a href="https://www.instagram.com/jp.joyas/" target="_blank" class="text-black hover:text-gray-700 text-3xl" aria-label="Instagram">
           <i class="fab fa-instagram"></i>
         </a>
-        <a href="https://www.facebook.com/JuanPabloOsorioJP/" target="_blank" class="text-blue-600 hover:text-blue-800 text-3xl" aria-label="Facebook">
+        <a href="https://www.facebook.com/JuanPabloOsorioJP/" target="_blank" class="text-black hover:text-gray-700 text-3xl" aria-label="Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </div>
@@ -36,8 +39,9 @@
     <img src="{{ asset('images/home.jpg') }}" class="hidden md:block h-auto w-auto rounded-xl shadow-lg">
   </div>
   {{-- Descripción --}}
+  <h2 class="font-dragonwick text-3xl font-semibold text-gray-800 mb-4">Presentacion</h2>
   <section id="presentacion" class="relative mb-16 bg-gray-300 rounded-lg shadow p-6">
-    <h2 class="font-dragonwick text-3xl font-semibold text-gray-800 mb-4">JP Joyas</h2>
+    
     {{-- Botón de edición solo visible si es admin --}}
     @auth
       @if(Auth::user()->is_admin)
@@ -52,8 +56,9 @@
     </p>
   </section>
   {{-- Historia --}}
+  <h2 class="font-dragonwick text-3xl font-semibold text-gray-800 mb-4">Quien Soy</h2>
   <section id="historia" class="relative mb-16 bg-gray-300 rounded-lg shadow p-6">
-    <h2 class="font-dragonwick text-3xl font-semibold text-gray-800 mb-4">Quién Soy</h2>
+    
     {{-- Botón de edición solo visible si es admin --}}
     @auth
       @if(Auth::user()->is_admin)
@@ -71,7 +76,7 @@
   {{-- Blog --}}
   <section>
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-3xl font-semibold">Blog</h2>
+      <h2 class="font-dragonwick text-3xl font-semibold">Blog</h2>
       @auth
         <a href="{{ route('blog.create') }}"
           class="inline-block bg-blue-100 text-blue-800 font-semibold px-4 py-2 rounded-lg border border-blue-300 hover:bg-blue-200 transition">
@@ -86,17 +91,10 @@
       <div class="space-y-8">
         @foreach($posts as $post)
         <article class="relative bg-gray-300 p-6 rounded-lg shadow hover:shadow-md transition">
-          {{-- Botones flotantes --}}
-          @auth
-            @if(Auth::id() === $post->user_id)
-              <div class="absolute top-2 -right-12 flex flex-col space-y-2 z-10">
-                <x-delete-button :action="route('blog.destroy', $post)" />
-                <x-edit-button :href="route('blog.edit', $post)" />
-              </div>
-            @endif
-          @endauth
+          
 
           <div class="flex flex-col md:flex-row md:items-start gap-6">
+            
             
             {{-- Columna de texto --}}
             <div class="flex-1 min-w-0">
@@ -111,6 +109,15 @@
 
               {{-- Botón Ver más con texto --}}
               <x-view-button :href="route('blog.show', $post)" />
+              {{-- Botones flotantes --}}
+              @auth
+                @if(Auth::id() === $post->user_id)
+                  <div class="flex flex-col space-y-2 z-10 items-end">
+                    <x-delete-button :action="route('blog.destroy', $post)" />
+                    <x-edit-button :href="route('blog.edit', $post)" />
+                  </div>
+                @endif
+              @endauth
             </div>
 
             {{-- Imagen (si existe) --}}
