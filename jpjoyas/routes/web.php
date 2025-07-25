@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\InfoContentController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -19,6 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/blog', [BlogPostController::class, 'store'])->name('blog.store');
 });
 
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/contenido/{section}/editar', [InfoContentController::class, 'edit'])
+        ->name('info.edit');
+    Route::post('/contenido/{section}/actualizar', [InfoContentController::class, 'update'])
+        ->name('info.update');
+});
+
 // Blog trix upload route 
 Route::post('/trix-upload', [\App\Http\Controllers\TrixUploadController::class, 'upload'])->name('trix.upload');
 
@@ -26,6 +34,6 @@ Route::post('/trix-upload', [\App\Http\Controllers\TrixUploadController::class, 
 Route::get('/blog', [\App\Http\Controllers\BlogPostController::class, 'index'])->name('blog.index');
 
 // Blog posts routes
-Route::resource('blog', BlogPostController::class)->middleware('auth');
+Route::resource('blog', BlogPostController::class); //->middleware('auth');
 
 require __DIR__.'/auth.php';

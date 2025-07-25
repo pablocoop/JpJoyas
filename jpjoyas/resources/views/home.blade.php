@@ -1,23 +1,82 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-4xl mx-auto px-6 py-12">
+<div class="max-w-5xl mx-auto px-6 py-8 bg-gray-300/70 backdrop-blur rounded-lg mt-8">
+  {{-- Contenedor principal --}}  
   {{-- Presentación --}}
-  <section id="presentacion" class="mb-16 text-center">
-    <h1 class="text-5xl font-extrabold text-gray-800 mb-4 tracking-tight">JP Joyas</h1>
-    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Bienvenidos a nuestro catálogo digital de joyería artesanal hecha a mano con amor desde Villarrica.</p>
-  </section>
+  <section id="titulo" class="mb-4 text-center">
+    <h1 class="font-dragonwick text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl  text-gray-800 mb-2 tracking-tight text-center">
+      JP Joyas
+    </h1>
+    <p class="text-lg text-gray-700 font-dragonwick">
+      Joyería&nbsp;  online&nbsp; de Villarrica.
+    </p>
+    <div class="border border-gray-500 rounded-lg px-6 py-4 inline-block mt-4">
+      <p class=" text-lg text-gray-700 mb-4">
+        Accede al catálogo de mis redes sociales
+      </p>
 
-  {{-- Historia --}}
-  <section id="historia" class="mb-16 bg-white rounded-lg shadow p-6">
-    <h2 class="text-3xl font-semibold text-gray-800 mb-4">Nuestra Historia</h2>
-    <p class="text-gray-600 leading-relaxed">JP Joyas nace del amor por los detalles y la pasión por lo hecho a mano. Cada pieza cuenta una historia única, elaborada con dedicación y creatividad.</p>
+      <div class="flex justify-center space-x-6">
+        <a href="https://wa.me/message/RCSEZTH4EZGMA1" target="_blank" class="text-black hover:text-gray-700 text-3xl" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.instagram.com/jp.joyas/" target="_blank" class="text-black hover:text-gray-700 text-3xl" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/JuanPabloOsorioJP/" target="_blank" class="text-black hover:text-gray-700 text-3xl" aria-label="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </div>
+    </div>
+    
   </section>
+  {{-- Imágenes --}}
+  <div class="flex justify-center mb-12">
+    {{-- Imagen para celulares --}}
+    <img src="{{ asset('images/home-mobile.jpg') }}" class="block md:hidden h-auto w-auto rounded-xl shadow-lg">
+
+    {{-- Imagen para pantallas medianas en adelante --}}
+    <img src="{{ asset('images/home.jpg') }}" class="hidden md:block h-auto w-auto rounded-xl shadow-lg">
+  </div>
+  {{-- Descripción --}}
+  <h2 class="font-dragonwick text-3xl font-semibold text-gray-800 mb-4">Presentacion</h2>
+  <section id="presentacion" class="relative mb-16 bg-gray-300 rounded-lg shadow p-6">
+    
+    {{-- Botón de edición solo visible si es admin --}}
+    @auth
+      @if(Auth::user()->is_admin)
+        <div class="absolute top-4 right-4">
+          <x-edit-button :href="route('info.edit', 'descripcion')" />
+        </div>
+      @endif
+    @endauth
+
+    <p class="text-gray-600 leading-relaxed text-xl">
+      {!! $descripcion ?? 'Aquí va la descripción de JP Joyas.' !!}
+    </p>
+  </section>
+  {{-- Historia --}}
+  <h2 class="font-dragonwick text-3xl font-semibold text-gray-800 mb-4">Quien Soy</h2>
+  <section id="historia" class="relative mb-16 bg-gray-300 rounded-lg shadow p-6">
+    
+    {{-- Botón de edición solo visible si es admin --}}
+    @auth
+      @if(Auth::user()->is_admin)
+        <div class="absolute top-4 right-4">
+          <x-edit-button :href="route('info.edit', 'historia')" />
+        </div>
+      @endif
+    @endauth
+    <p class="text-gray-600 leading-relaxed text-xl">
+      {!! $historia ?? 'Aquí va la historia.' !!}
+    </p>
+
+    </section>
 
   {{-- Blog --}}
   <section>
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-3xl font-semibold">Blog</h2>
+      <h2 class="font-dragonwick text-3xl font-semibold">Blog</h2>
       @auth
         <a href="{{ route('blog.create') }}"
           class="inline-block bg-blue-100 text-blue-800 font-semibold px-4 py-2 rounded-lg border border-blue-300 hover:bg-blue-200 transition">
@@ -27,22 +86,15 @@
     </div>
 
     @if($posts->isEmpty())
-      <p class="text-gray-600">No hay publicaciones aún.</p>
+      <p class="text-gray-800">No hay publicaciones aún.</p>
     @else
       <div class="space-y-8">
         @foreach($posts as $post)
-        <article class="relative bg-white p-6 rounded-lg shadow hover:shadow-md transition">
-          {{-- Botones flotantes --}}
-          @auth
-            @if(Auth::id() === $post->user_id)
-              <div class="absolute top-2 -right-12 flex flex-col space-y-2 z-10">
-                <x-delete-button :action="route('blog.destroy', $post)" />
-                <x-edit-button :href="route('blog.edit', $post)" />
-              </div>
-            @endif
-          @endauth
+        <article class="relative bg-gray-300 p-6 rounded-lg shadow hover:shadow-md transition">
+          
 
           <div class="flex flex-col md:flex-row md:items-start gap-6">
+            
             
             {{-- Columna de texto --}}
             <div class="flex-1 min-w-0">
@@ -57,6 +109,15 @@
 
               {{-- Botón Ver más con texto --}}
               <x-view-button :href="route('blog.show', $post)" />
+              {{-- Botones flotantes --}}
+              @auth
+                @if(Auth::id() === $post->user_id)
+                  <div class="flex flex-col space-y-2 z-10 items-end">
+                    <x-delete-button :action="route('blog.destroy', $post)" />
+                    <x-edit-button :href="route('blog.edit', $post)" />
+                  </div>
+                @endif
+              @endauth
             </div>
 
             {{-- Imagen (si existe) --}}

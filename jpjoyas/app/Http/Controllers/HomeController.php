@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BlogPost;
+use App\Models\InfoContent;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $descripcion = InfoContent::where('section', 'descripcion')->value('body') ?? '';
+        $historia    = InfoContent::where('section', 'historia')->value('body') ?? '';
+
         $posts = BlogPost::latest()->get()->map(function ($post) {
             // Extraer primera imagen embebida y agregarle clases Tailwind
             preg_match('/<img[^>]+src="([^">]+)"/i', $post->body, $imgMatch);
@@ -30,7 +34,7 @@ class HomeController extends Controller
             return $post;
         });
 
-        return view('home', compact('posts'));
+        return view('home', compact('posts', 'descripcion', 'historia'));
     }
     
 }

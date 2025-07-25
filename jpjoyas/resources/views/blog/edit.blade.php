@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-3xl mx-auto px-6 py-10">
+<div class="mx-auto max-w-4xl px-6 py-20 bg-gray-300/70 backdrop-blur rounded-lg mt-8">
     <h1 class="text-3xl font-bold mb-6">Editar Post</h1>
 
     <form method="POST" action="{{ route('blog.update', $post) }}" enctype="multipart/form-data">
@@ -49,7 +49,7 @@
 
         {{-- Botones --}}
         <div class="flex justify-between items-center">
-            <a href="{{ route('home') }}" class="text-gray-600 hover:underline">Cancelar</a>
+            <a href="{{ route('home') }}" class="text-red-600 hover:underline">Cancelar</a>
             <button type="submit"
                     class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
                 Actualizar Post

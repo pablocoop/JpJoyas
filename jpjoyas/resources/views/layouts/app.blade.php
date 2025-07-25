@@ -4,13 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+        <!-- Font Awesome CDN -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <x-rich-text::styles theme="richtextlaravel" data-turbo-track="false" />
@@ -19,8 +22,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.umd.min.js"></script>
     </head>
 
-    <body class="font-sans antialiased">
-        <div class="flex flex-col min-h-screen bg-gray-100">
+    <body class="font-sans antialiased bg-fixed bg-no-repeat bg-top bg-black" style="background-image: url('/images/fondo-jpjoyas.jpg'); background-size: contain;">
+        <div class="flex flex-col min-h-screen bg-black/30">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -37,19 +40,19 @@
                 @yield('content') 
             </main>
 
-            <footer class="bg-gray-100 mt-16 border-t border-gray-200">
-                <div class="max-w-4xl mx-auto px-6 py-8 text-center text-sm text-gray-600">
-                    <p class="mb-4 font-semibold">Encuéntranos en nuestras redes sociales</p>
-                    <div class="flex justify-center space-x-6 text-blue-700">
-                        <a href="https://www.facebook.com/JuanPabloOsorioJP/" target="_blank" class="hover:underline">
-                            Facebook
-                        </a>
-                        <a href="https://www.instagram.com/invites/contact/?i=1egfgisxytf3a&utm_content=5h9sk0o" target="_blank" class="hover:underline">
-                            Instagram
-                        </a>
-                        <a href="https://wa.me/message/RCSEZTH4EZGMA1" target="_blank" class="hover:underline">
-                            WhatsApp
-                        </a>
+            <footer class="bg-black mt-16 border-t border-gray-900">
+                <div class="max-w-4xl mx-auto px-6 py-8 text-center text-sm text-gray-100">
+                    <p class="mb-4 font-semibold"> Contáctame solo por teléfono o WhatsApp</p>
+                    <div class="flex justify-center space-x-6">
+                    <a href="https://wa.me/message/RCSEZTH4EZGMA1" target="_blank" class="text-green-600 hover:text-green-800 text-3xl" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://www.instagram.com/jp.joyas/" target="_blank" class="text-pink-500 hover:text-pink-700 text-3xl" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.facebook.com/JuanPabloOsorioJP/" target="_blank" class="text-blue-600 hover:text-blue-800 text-3xl" aria-label="Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
                     </div>
                     <p class="mt-4 text-gray-400">&copy; {{ date('Y') }} JP Joyas · Villarrica</p>
                 </div>

@@ -17,8 +17,9 @@ class AdminUserSeeder extends Seeder
         User::create([
             'name' => 'JP Joyas',
             'username' => 'admin', // solo si agregaste ese campo antes
-            'email' => 'juanpabloosorio@gmail.com',
+            'email' => 'admin@admin.cl',
             'password' => Hash::make('admin123'), // cámbialo luego por seguridad
+            'is_admin' => true,
         ]);
     }
 }
