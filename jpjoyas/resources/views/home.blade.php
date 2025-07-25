@@ -9,7 +9,7 @@
       JP Joyas
     </h1>
     <p class="text-lg text-gray-700 font-dragonwick">
-      Joyería&nbsp;  online&nbsp; de Villarrica.
+      Joyeria&nbsp;  online&nbsp; de Villarrica.
     </p>
     <div class="border border-gray-500 rounded-lg px-6 py-4 inline-block mt-4">
       <p class=" text-lg text-gray-700 mb-4">
@@ -38,6 +38,45 @@
     {{-- Imagen para pantallas medianas en adelante --}}
     <img src="{{ asset('images/home.jpg') }}" class="hidden md:block h-auto w-auto rounded-xl shadow-lg">
   </div>
+  {{-- Servicios --}}
+  <h2 class="font-dragonwick text-3xl font-semibold text-gray-800 mb-4 text-center">Servicios</h2>
+  <section id="servicios" class="grid gap-8 md:grid-cols-2 bg-gray-300 rounded-lg shadow p-6 mb-16">
+    
+    {{-- Servicio: Joyas Personalizadas --}}
+    <div class="bg-white rounded-lg p-4 shadow hover:shadow-md transition">
+      <h3 class="text-xl font-bold text-gray-800 mb-2">Joyas personalizadas</h3>
+      <p class="text-gray-600">
+        Diseña la joya perfecta para esa persona especial. Pulsera, colgante, anillo o aros personalizados con nombre, color o gema que la represente. ¡Crea un diseño único y haz que brille!
+      </p>
+    </div>
+
+    {{-- Servicio: Atención a Domicilio --}}
+    <div class="bg-white rounded-lg p-4 shadow hover:shadow-md transition">
+      <h3 class="text-xl font-bold text-gray-800 mb-2">Atención a domicilio</h3>
+      <p class="text-gray-600">
+        En Villarrica tienes la ventaja de poder recibir una atención personalizada a domicilio quedando a tu elección si es desde mi auto o dentro de tu casa, donde más te acomode. En el radio urbano y sectores rurales cercanos.
+      </p>
+    </div>
+
+    {{-- Servicio: Reparaciones --}}
+    <div class="bg-white rounded-lg p-4 shadow hover:shadow-md transition">
+      <h3 class="text-xl font-bold text-gray-800 mb-2">Reparaciones</h3>
+      <p class="text-gray-600">
+        ¿Tienes una joya de plata que ya no usas por un defecto o se dañó? No la deseches. ¡Comunícate conmigo y la reparo! Arreglo de soldaduras y restauración de joyas al precio más conveniente.
+      </p>
+    </div>
+
+    {{-- Servicio: Entrega de Regalos Sorpresa --}}
+    <div class="bg-white rounded-lg p-4 shadow hover:shadow-md transition">
+      <h3 class="text-xl font-bold text-gray-800 mb-2">Entrega de regalos sorpresa</h3>
+      <p class="text-gray-600">
+        ¿Quieres sorprender a alguien especial desde lejos? Elige tu joya favorita y yo me encargo de entregarla directamente a esa persona especial. Puedes incluir una caja joyero personalizada para hacer el regalo aún más especial. Cumpleaños, aniversarios o cualquier ocasión es perfecta.
+      </p>
+    </div>
+
+  </section>
+
+
   {{-- Descripción --}}
   <h2 class="font-dragonwick text-3xl font-semibold text-gray-800 mb-4">Presentacion</h2>
   <section id="presentacion" class="relative mb-16 bg-gray-300 rounded-lg shadow p-6">
