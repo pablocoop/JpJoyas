@@ -76,7 +76,7 @@
   {{-- Blog --}}
   <section>
     <div class="flex justify-between items-center mb-6">
-      <h2 class="font-dragonwick text-3xl font-semibold">Blog</h2>
+      <h2 class="font-dragonwick text-3xl font-semibold text-gray-800 mb-4">Blog</h2>
       @auth
         <a href="{{ route('blog.create') }}"
           class="inline-block bg-blue-100 text-blue-800 font-semibold px-4 py-2 rounded-lg border border-blue-300 hover:bg-blue-200 transition">
@@ -86,7 +86,9 @@
     </div>
 
     @if($posts->isEmpty())
-      <p class="text-gray-800">No hay publicaciones aún.</p>
+      <div class="relative bg-gray-300 p-6 rounded-lg shadow hover:shadow-md transition">
+        <p class="text-gray-800">No hay publicaciones aún.</p>
+      </div>
     @else
       <div class="space-y-8">
         @foreach($posts as $post)
@@ -107,17 +109,19 @@
                   {!! $post->preview_text !!}
               </div>
 
-              {{-- Botón Ver más con texto --}}
-              <x-view-button :href="route('blog.show', $post)" />
-              {{-- Botones flotantes --}}
-              @auth
-                @if(Auth::id() === $post->user_id)
-                  <div class="flex flex-col space-y-2 z-10 items-end">
-                    <x-delete-button :action="route('blog.destroy', $post)" />
-                    <x-edit-button :href="route('blog.edit', $post)" />
-                  </div>
-                @endif
-              @endauth
+              {{-- Botones en fila horizontal --}}
+              <div class="flex items-center space-x-2">
+                  {{-- Botón Ver más --}}
+                  <x-view-button :href="route('blog.show', $post)" />
+
+                  {{-- Botones de edición solo si es el autor --}}
+                  @auth
+                      @if(Auth::id() === $post->user_id)
+                          <x-edit-button :href="route('blog.edit', $post)" />
+                          <x-delete-button :action="route('blog.destroy', $post)" />
+                      @endif
+                  @endauth
+              </div>
             </div>
 
             {{-- Imagen (si existe) --}}
