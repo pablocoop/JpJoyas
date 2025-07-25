@@ -9,6 +9,7 @@
                         <x-application-logo class="block h-20 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
+                
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex text-lg font-semibold">
@@ -19,7 +20,7 @@
                         {{ __('Presentación') }}
                     </x-nav-link>
                     <x-nav-link href="{{ url('/#historia') }}">
-                        {{ __('Historia') }}
+                        {{ __('Quién Soy') }}
                     </x-nav-link>
                     <x-nav-link :href="route('blog.index')" :active="request()->routeIs('blog.index')">
                         {{ __('Blog') }}
@@ -68,6 +69,13 @@
                 @endauth
             </div>
 
+            <!-- Subtítulo solo visible en móviles -->
+            <div class="sm:hidden flex items-center justify-end flex-1 me-4">
+                <p class="font-dragonwick text-base text-gray-800 font-medium whitespace-nowrap text-right">
+                    Joyería online de Villarrica.
+                </p>
+            </div>
+
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-300 focus:outline-none focus:bg-gray-300 focus:text-gray-500 transition duration-150 ease-in-out">
@@ -82,9 +90,13 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': ! open }" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+        <div class="mt-3 space-y-1">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Página Principal') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('blog.index')" :active="request()->routeIs('blog.index')">
+                {{ __('Blog') }}
             </x-responsive-nav-link>
         </div>
 

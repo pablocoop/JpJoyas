@@ -5,17 +5,38 @@
   {{-- Contenedor principal --}}  
   {{-- Presentación --}}
   <section id="titulo" class="mb-16 text-center">
-    <h1 class="font-dragonwick text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-white/80 to-white/10 mb-4 tracking-tight text-center">
+    <h1 class="font-dragonwick text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl  text-gray-800 mb-4 tracking-tight text-center">
       JP Joyas
     </h1>
-    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Joyería online de Villarrica.</p>
+    <div class="border border-gray-500 rounded-lg px-6 py-4 inline-block mt-4">
+      <p class=" text-lg text-gray-700 mb-4">
+        Accede al catálogo de mis redes sociales
+      </p>
+
+      <div class="flex justify-center space-x-6">
+        <a href="https://wa.me/message/RCSEZTH4EZGMA1" target="_blank" class="text-green-600 hover:text-green-800 text-3xl" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.instagram.com/jp.joyas/" target="_blank" class="text-pink-500 hover:text-pink-700 text-3xl" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/JuanPabloOsorioJP/" target="_blank" class="text-blue-600 hover:text-blue-800 text-3xl" aria-label="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </div>
+    </div>
+    
   </section>
   {{-- Imágenes --}}
   <div class="flex justify-center mb-12">
-      <img src="{{ asset('images/home.jpg') }}" class="h-auto w-auto rounded-xl shadow-lg">
+    {{-- Imagen para celulares --}}
+    <img src="{{ asset('images/home-mobile.jpg') }}" class="block md:hidden h-auto w-auto rounded-xl shadow-lg">
+
+    {{-- Imagen para pantallas medianas en adelante --}}
+    <img src="{{ asset('images/home.jpg') }}" class="hidden md:block h-auto w-auto rounded-xl shadow-lg">
   </div>
   {{-- Descripción --}}
-  <section id="descripcion" class="relative mb-16 bg-gray-300 rounded-lg shadow p-6">
+  <section id="presentacion" class="relative mb-16 bg-gray-300 rounded-lg shadow p-6">
     <h2 class="font-dragonwick text-3xl font-semibold text-gray-800 mb-4">JP Joyas</h2>
     {{-- Botón de edición solo visible si es admin --}}
     @auth
@@ -27,12 +48,12 @@
     @endauth
 
     <p class="text-gray-600 leading-relaxed text-xl">
-      {!! $descripcion ? nl2br(e($descripcion)) : 'Aquí va la descripción de JP Joyas.' !!}
+      {!! $descripcion ?? 'Aquí va la descripción de JP Joyas.' !!}
     </p>
   </section>
   {{-- Historia --}}
   <section id="historia" class="relative mb-16 bg-gray-300 rounded-lg shadow p-6">
-    <h2 class="text-3xl font-semibold text-gray-800 mb-4">Nuestra Historia</h2>
+    <h2 class="font-dragonwick text-3xl font-semibold text-gray-800 mb-4">Quién Soy</h2>
     {{-- Botón de edición solo visible si es admin --}}
     @auth
       @if(Auth::user()->is_admin)
@@ -42,7 +63,7 @@
       @endif
     @endauth
     <p class="text-gray-600 leading-relaxed text-xl">
-      {!! $historia ? nl2br(e($historia)) : 'Aquí va la historia.' !!}
+      {!! $historia ?? 'Aquí va la historia.' !!}
     </p>
 
     </section>
