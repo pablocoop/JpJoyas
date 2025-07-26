@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\InfoContentController;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -36,4 +37,8 @@ Route::get('/blog', [\App\Http\Controllers\BlogPostController::class, 'index'])-
 // Blog posts routes
 Route::resource('blog', BlogPostController::class); //->middleware('auth');
 
+Route::get('/run-migrations', function () {
+    Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
+    return 'Migraciones y seeders ejecutados correctamente.';
+});
 require __DIR__.'/auth.php';

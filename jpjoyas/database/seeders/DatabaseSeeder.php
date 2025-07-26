@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +16,12 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        User::create([
             'name' => 'Test User',
-            'username' => 'user', // solo si agregaste ese campo antes
+            'username' => 'user', // solo si agregaste ese campo en tu migración
             'email' => 'test@example.com',
-            'password' => bcrypt('pass'), // cámbialo luego por seguridad
+            'password' => Hash::make('pass'), // encripta bien
+            'is_admin' => false, // si tienes esta columna
         ]);
 
         $this->call([
