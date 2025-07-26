@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\InfoContentController;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -41,4 +42,18 @@ Route::get('/run-migrations', function () {
     Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
     return 'Migraciones y seeders ejecutados correctamente.';
 });
+
+Route::get('/artisan-cache-clear', function () {
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+    Artisan::call('cache:clear');
+    return 'Caches limpiadas';
+});
+
+Route::get('/log-test', function () {
+    Log::error('Este es un error de prueba desde la ruta /log-test');
+    abort(500, 'Error intencional para probar el log');
+});
 require __DIR__.'/auth.php';
+
+
