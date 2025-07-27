@@ -1,0 +1,17 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-CMi1B58d.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/fonts/Dragonwick.ttf": {
+    "file": "assets/Dragonwick-BJk-nhxw.ttf",
+    "src": "resources/fonts/Dragonwick.ttf"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-Bi2IwbUM.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}

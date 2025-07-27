@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\InfoContentController;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -36,4 +38,40 @@ Route::get('/blog', [\App\Http\Controllers\BlogPostController::class, 'index'])-
 // Blog posts routes
 Route::resource('blog', BlogPostController::class); //->middleware('auth');
 
+Route::get('/run-migrations', function () {
+    Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
+    return 'Migraciones y seeders ejecutados correctamente.';
+});
+
+Route::get('/artisan-cache-clear', function () {
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+    Artisan::call('cache:clear');
+    return 'Caches limpiadas';
+});
+
+Route::get('/log-test', function () {
+    Log::error('Este es un error de prueba desde la ruta /log-test');
+    abort(500, 'Error intencional para probar el log');
+});
+
+//DEV
+Route::get('/crear-symlink', function () {
+    $target = '/home3/jpjoyas/laravel/storage/app/public';
+    $link = '/home3/jpjoyas/public_html/storage';
+
+    if (file_exists($link)) {
+        return 'Ya existe la carpeta o symlink en public_html/storage.';
+    }
+
+    if (symlink($target, $link)) {
+        return 'Symlink creado exitosamente.';
+    } else {
+        return 'Fallo al crear el symlink.';
+    }
+});
+
+
 require __DIR__.'/auth.php';
+
+
