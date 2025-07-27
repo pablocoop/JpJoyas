@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Tonysm\RichTextLaravel\Casts\AsRichTextContent;
 use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
+
 
 class BlogPost extends Model
 {
@@ -27,5 +30,25 @@ class BlogPost extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    // ✅ Este método se ejecutará al eliminar un post
+    protected static function booted()
+    {
+        static::deleting(function ($post) {
+            preg_match_all('/<img[^>]+src="([^">]+)"/i', $post->body->toHtml(), $matches);
+
+            foreach ($matches[1] as $url) {
+                if (str_contains($url, 'storage/trix-images/')) {
+                    $filename = basename($url);
+                    $path = public_path('storage/trix-images/' . $filename);
+
+                    if (File::exists($path)) {
+                        Log::info('Archivo a borrar: ' . $path);
+                        File::delete($path);
+                    }
+                }
+            }
+        });
     }
 }

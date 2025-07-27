@@ -54,6 +54,24 @@ Route::get('/log-test', function () {
     Log::error('Este es un error de prueba desde la ruta /log-test');
     abort(500, 'Error intencional para probar el log');
 });
+
+//DEV
+Route::get('/crear-symlink', function () {
+    $target = '/home3/jpjoyas/laravel/storage/app/public';
+    $link = '/home3/jpjoyas/public_html/storage';
+
+    if (file_exists($link)) {
+        return 'Ya existe la carpeta o symlink en public_html/storage.';
+    }
+
+    if (symlink($target, $link)) {
+        return 'Symlink creado exitosamente.';
+    } else {
+        return 'Fallo al crear el symlink.';
+    }
+});
+
+
 require __DIR__.'/auth.php';
 
 
