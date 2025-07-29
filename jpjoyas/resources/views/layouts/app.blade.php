@@ -20,6 +20,15 @@
         <!-- Trix Editor -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.umd.min.js"></script>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-7EF9TPJPDN"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-7EF9TPJPDN');
+        </script>
     </head>
 
     <body class="font-sans antialiased bg-fixed bg-no-repeat bg-top bg-black" style="background-image: url('/images/fondo-jpjoyas.jpg'); background-size: contain;">
