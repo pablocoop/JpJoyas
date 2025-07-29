@@ -61,4 +61,3 @@ php artisan serve
 ## Contribuciones
 
 Las contribuciones son bienvenidas. Haz un fork y envía tu Pull Request.
-
