@@ -7,6 +7,7 @@ use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\InfoContentController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -37,6 +38,21 @@ Route::get('/blog', [\App\Http\Controllers\BlogPostController::class, 'index'])-
 
 // Blog posts routes
 Route::resource('blog', BlogPostController::class); //->middleware('auth');
+
+// Ruta para limpiar cachés manualmente desde el navegador
+// ⚠️ IMPORTANTE: Mantener comentada en producción, o restringir a admin ⚠️
+
+Route::get('/clear-cache', function () {
+    if (!Auth::check() || !Auth::user()->is_admin) {
+        abort(403);
+    }
+    Artisan::call('view:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('cache:clear');
+    return '✅ Cachés limpiados exitosamente.';
+});
+
 
 Route::get('/run-migrations', function () {
     Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
@@ -84,6 +100,7 @@ Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     return '✅ Cachés limpiados exitosamente.';
 });
+
 
 require __DIR__.'/auth.php';
 
