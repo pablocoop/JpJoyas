@@ -139,10 +139,10 @@
     @else
       <div class="space-y-8">
         @foreach($posts as $post)
-        <article class="relative bg-gray-300 p-6 rounded-lg shadow hover:shadow-md transition">
+        <article class="bg-gray-300 p-6 rounded-lg shadow hover:shadow-md transition">
           <div class="flex flex-col md:flex-row md:items-start gap-6">
 
-            {{-- Columna de texto --}}
+            {{-- Columna de texto y botones --}}
             <div class="flex-1 min-w-0 order-1 md:order-none flex flex-col">
               <h3 class="text-2xl font-bold text-gray-800 mb-1">{{ $post->title }}</h3>
               <p class="text-sm text-gray-500 mb-3">
@@ -151,6 +151,17 @@
 
               <div class="prose max-w-none text-gray-700 break-words mb-4">
                 {!! $post->preview_text !!}
+              </div>
+
+              {{-- Botones debajo del texto --}}
+              <div class="flex items-center space-x-2 mt-2">
+                <x-view-button :href="route('blog.show', $post)" />
+                @auth
+                  @if(Auth::id() === $post->user_id)
+                    <x-edit-button :href="route('blog.edit', $post)" />
+                    <x-delete-button :action="route('blog.destroy', $post)" />
+                  @endif
+                @endauth
               </div>
             </div>
 
@@ -163,19 +174,9 @@
               </div>
             @endif
 
-            {{-- Botones (al final en móvil, debajo del texto en PC) --}}
-            <div class="order-3 md:absolute md:bottom-6 md:left-6 flex space-x-2 mt-4 md:mt-0">
-              <x-view-button :href="route('blog.show', $post)" />
-              @auth
-                @if(Auth::id() === $post->user_id)
-                  <x-edit-button :href="route('blog.edit', $post)" />
-                  <x-delete-button :action="route('blog.destroy', $post)" />
-                @endif
-              @endauth
-            </div>
-
           </div>
         </article>
+
 
         @endforeach
 
