@@ -9,7 +9,6 @@ use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 
-
 class BlogPost extends Model
 {
     use HasFactory, HasRichText;
@@ -25,30 +24,35 @@ class BlogPost extends Model
     protected $casts = [
         'body' => AsRichTextContent::class,
     ];
+
     protected array $richTextAttributes = ['body'];
+
+    //  Aquí va el método booted() para configurar eventos como deleting
+    protected static function booted(): void
+    {
+        static::deleting(function ($post) {
+            // Obtener el contenido HTML real
+            $html = $post->body->toHtml(); // No uses raw; esto ya es HTML limpio
+    
+            // Buscar URLs dentro de los atributos url="" o href="" en rich-text-attachment
+            preg_match_all('/(?:url|href)="([^">]+\/trix-images\/[^">]+)"/i', $html, $matches);
+    
+            foreach ($matches[1] as $url) {
+                $filename = basename($url);
+                $path = storage_path('app/public/trix-images/' . $filename);
+    
+                if (File::exists($path)) {
+                    Log::info('Archivo a borrar: ' . $path);
+                    File::delete($path);
+                } else {
+                    Log::warning('Archivo no encontrado para borrar: ' . $path);
+                }
+            }
+        });
+    }
 
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    // ✅ Este método se ejecutará al eliminar un post
-    protected static function booted()
-    {
-        static::deleting(function ($post) {
-            preg_match_all('/<img[^>]+src="([^">]+)"/i', $post->body->toHtml(), $matches);
-
-            foreach ($matches[1] as $url) {
-                if (str_contains($url, 'storage/trix-images/')) {
-                    $filename = basename($url);
-                    $path = public_path('storage/trix-images/' . $filename);
-
-                    if (File::exists($path)) {
-                        Log::info('Archivo a borrar: ' . $path);
-                        File::delete($path);
-                    }
-                }
-            }
-        });
     }
 }
