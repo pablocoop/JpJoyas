@@ -71,6 +71,19 @@ Route::get('/crear-symlink', function () {
     }
 });
 
+// Ruta para limpiar cachés manualmente desde el navegador
+// ⚠️ IMPORTANTE: Mantener comentada en producción, o restringir a admin ⚠️
+
+Route::get('/clear-cache', function () {
+    if (!Auth::check() || !Auth::user()->is_admin) {
+        abort(403);
+    }
+    Artisan::call('view:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('cache:clear');
+    return '✅ Cachés limpiados exitosamente.';
+});
 
 require __DIR__.'/auth.php';
 

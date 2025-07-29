@@ -117,7 +117,7 @@
     </section>
 
   {{-- Blog --}}
-  <section>
+  <section id="blog">
     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
       {{-- Título: centrado en móvil, a la izquierda en PC --}}
       <h2 class="px-6 text-center md:text-left font-dragonwick text-3xl font-semibold text-gray-800 mb-4 md:mb-0">
@@ -139,41 +139,35 @@
     @else
       <div class="space-y-8">
         @foreach($posts as $post)
-        <article class="relative bg-gray-300 p-6 rounded-lg shadow hover:shadow-md transition">
-          
-
+        <article class="bg-gray-300 p-6 rounded-lg shadow hover:shadow-md transition">
           <div class="flex flex-col md:flex-row md:items-start gap-6">
-            
-            
-            {{-- Columna de texto --}}
-            <div class="flex-1 min-w-0">
+
+            {{-- Columna de texto y botones --}}
+            <div class="flex-1 min-w-0 order-1 md:order-none flex flex-col">
               <h3 class="text-2xl font-bold text-gray-800 mb-1">{{ $post->title }}</h3>
               <p class="text-sm text-gray-500 mb-3">
-                  por {{ $post->user->name }} · {{ $post->created_at->format('d M Y') }}
+                por {{ $post->user->name }} · {{ $post->created_at->format('d M Y') }}
               </p>
 
               <div class="prose max-w-none text-gray-700 break-words mb-4">
-                  {!! $post->preview_text !!}
+                {!! $post->preview_text !!}
               </div>
 
-              {{-- Botones en fila horizontal --}}
-              <div class="flex items-center space-x-2">
-                  {{-- Botón Ver más --}}
-                  <x-view-button :href="route('blog.show', $post)" />
-
-                  {{-- Botones de edición solo si es el autor --}}
-                  @auth
-                      @if(Auth::id() === $post->user_id)
-                          <x-edit-button :href="route('blog.edit', $post)" />
-                          <x-delete-button :action="route('blog.destroy', $post)" />
-                      @endif
-                  @endauth
+              {{-- Botones debajo del texto --}}
+              <div class="flex items-center space-x-2 mt-2">
+                <x-view-button :href="route('blog.show', $post)" />
+                @auth
+                  @if(Auth::id() === $post->user_id)
+                    <x-edit-button :href="route('blog.edit', $post)" />
+                    <x-delete-button :action="route('blog.destroy', $post)" />
+                  @endif
+                @endauth
               </div>
             </div>
 
-            {{-- Imagen (si existe) --}}
+            {{-- Imagen --}}
             @if($post->preview_image)
-              <div class="w-full md:w-1/3 flex-shrink-0 flex justify-center items-start">
+              <div class="w-full md:w-1/3 flex-shrink-0 flex justify-center items-start order-2 md:order-none mt-4 md:mt-0">
                 <div class="max-w-[200px] w-full">
                   {!! $post->preview_image !!}
                 </div>
@@ -182,6 +176,7 @@
 
           </div>
         </article>
+
 
         @endforeach
 
