@@ -8,7 +8,7 @@
         <a href="{{ route('home') }}{{ request('from') ? '#' . request('from') : '#blog' }}"
            class="inline-flex items-center px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-200 transition">
             <x-lucide-arrow-left class="w-5 h-5 mr-2" />
-            {{ request('from') ? 'Volver a ' . ucfirst(request('from')) : 'Volver al blog' }}
+            {{ request('from') ? 'Volver a ' . ucfirst(request('from')) : 'Volver atrás' }}
         </a>
     </div>
 

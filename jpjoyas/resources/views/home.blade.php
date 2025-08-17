@@ -116,12 +116,12 @@
 
     </section>
 
-  {{-- Blog --}}
+  {{-- Datos --}}
   <section id="blog">
     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
       {{-- Título: centrado en móvil, a la izquierda en PC --}}
       <h2 class="px-6 text-center md:text-left font-dragonwick text-3xl font-semibold text-gray-800 mb-4 md:mb-0">
-        Blog
+        Datos
       </h2>
       {{-- Botón: alineado a la derecha en PC, debajo en móvil --}}
       @auth

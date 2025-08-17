@@ -5,7 +5,7 @@
     <a href="{{ route('home') }}#blog"
     class="inline-flex items-center mb-6 px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-200 transition">
         <x-lucide-arrow-left class="w-5 h-5 mr-2" />
-        Volver al blog
+        Volver atrás
     </a>
     <article class="bg-gray-300 p-6 rounded-lg shadow">
         {{-- Título --}}
@@ -48,7 +48,7 @@
         <a href="{{ route('home') }}#blog"
         class="inline-flex items-center px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-200 transition">
             <x-lucide-arrow-left class="w-5 h-5 mr-2" />
-            Volver al blog
+            Volver atrás
         </a>
     </div>
 
